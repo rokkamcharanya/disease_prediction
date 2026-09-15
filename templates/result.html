@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Prediction Result - AI Disease Prediction</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f0fdfa;
+            color: #1f2937;
+        }
+
+        .navbar {
+            background: #0f766e;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h2 {
+            font-size: 22px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 850px;
+            margin: 45px auto;
+        }
+
+        .result-card {
+            background: white;
+            padding: 40px;
+            border-radius: 18px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .icon {
+            font-size: 65px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            color: #134e4a;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #64748b;
+            margin-bottom: 30px;
+        }
+
+        .prediction {
+            background: #ecfdf5;
+            border: 2px solid #10b981;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .prediction-title {
+            color: #047857;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .disease {
+            color: #065f46;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .confidence {
+            margin-top: 18px;
+            color: #475569;
+            font-size: 17px;
+        }
+
+        .confidence span {
+            color: #047857;
+            font-weight: bold;
+        }
+
+        .symptoms-box {
+            text-align: left;
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 10px;
+        }
+
+        .symptoms-box h3 {
+            color: #334155;
+            margin-bottom: 15px;
+        }
+
+        .symptom {
+            display: inline-block;
+            background: #ccfbf1;
+            color: #115e59;
+            padding: 8px 12px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .warning {
+            margin-top: 25px;
+            padding: 18px;
+            background: #fef3c7;
+            border-left: 5px solid #f59e0b;
+            border-radius: 8px;
+            color: #92400e;
+            text-align: left;
+            line-height: 1.6;
+        }
+
+        .buttons {
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 22px;
+            margin: 5px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .primary {
+            background: #0f766e;
+            color: white;
+        }
+
+        .primary:hover {
+            background: #115e59;
+        }
+
+        .secondary {
+            background: #e2e8f0;
+            color: #334155;
+        }
+
+        .secondary:hover {
+            background: #cbd5e1;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <nav class="navbar">
+
+        <h2>🩺 AI Disease Prediction</h2>
+
+        <div>
+
+            <a href="{{ url_for('dashboard') }}">
+                Dashboard
+            </a>
+
+            <a href="{{ url_for('logout') }}">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <div class="container">
+
+        <div class="result-card">
+
+
+            <div class="icon">
+                🩺
+            </div>
+
+
+            <h1>Prediction Result</h1>
+
+            <p class="subtitle">
+                Your symptoms have been analyzed by the machine learning model.
+            </p>
+
+
+            <div class="prediction">
+
+                <div class="prediction-title">
+                    Predicted Disease
+                </div>
+
+                <div class="disease">
+                    {{ disease }}
+                </div>
+
+                <div class="confidence">
+
+                    Prediction Confidence:
+
+                    <span>
+                        {{ confidence }}%
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            {% if selected_symptoms %}
+
+            <div class="symptoms-box">
+
+                <h3>
+                    Selected Symptoms
+                </h3>
+
+
+                {% for symptom in selected_symptoms %}
+
+                <span class="symptom">
+
+                    {{ symptom.replace("_", " ").title() }}
+
+                </span>
+
+                {% endfor %}
+
+            </div>
+
+            {% endif %}
+
+
+            <div class="warning">
+
+                <strong>⚠️ Important Medical Notice</strong>
+
+                <br>
+
+                This prediction is generated by a machine learning
+                system and is intended for educational and
+                decision-support purposes only.
+
+                It is <strong>not a medical diagnosis</strong>.
+
+                Please consult a qualified healthcare professional
+                for proper diagnosis and treatment.
+
+            </div>
+
+
+            <div class="buttons">
+
+                <a
+                    href="{{ url_for('predict') }}"
+                    class="btn primary"
+                >
+                    🔄 Try Again
+                </a>
+
+
+                <a
+                    href="{{ url_for('dashboard') }}"
+                    class="btn secondary"
+                >
+                    ← Dashboard
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

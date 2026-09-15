@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard - AI Disease Prediction</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f0fdfa;
+            color: #1f2937;
+        }
+
+        .navbar {
+            background: #0f766e;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h2 {
+            font-size: 22px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 50px auto;
+        }
+
+        .welcome {
+            margin-bottom: 30px;
+        }
+
+        .welcome h1 {
+            color: #134e4a;
+            margin-bottom: 8px;
+        }
+
+        .welcome p {
+            color: #64748b;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .card h2 {
+            color: #134e4a;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #0f766e;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #115e59;
+        }
+
+        .history-btn {
+            background: #475569;
+        }
+
+        .history-btn:hover {
+            background: #334155;
+        }
+
+        .logout {
+            background: #dc2626;
+            padding: 8px 14px;
+            border-radius: 6px;
+        }
+
+        .logout:hover {
+            background: #b91c1c;
+            text-decoration: none !important;
+        }
+
+        .notice {
+            margin-top: 30px;
+            padding: 18px;
+            background: #fef3c7;
+            border-left: 5px solid #f59e0b;
+            border-radius: 8px;
+            color: #92400e;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <h2>🩺 AI Disease Prediction</h2>
+
+        <div>
+            <a href="{{ url_for('home') }}">Home</a>
+
+            <a href="{{ url_for('logout') }}" class="logout">
+                Logout
+            </a>
+        </div>
+
+    </nav>
+
+
+    <div class="container">
+
+        <div class="welcome">
+
+            <h1>
+                Welcome, {{ username }}! 👋
+            </h1>
+
+            <p>
+                Welcome to your AI-powered healthcare dashboard.
+            </p>
+
+        </div>
+
+
+        <div class="cards">
+
+            <!-- Disease Prediction -->
+
+            <div class="card">
+
+                <div class="icon">🤖</div>
+
+                <h2>Disease Prediction</h2>
+
+                <p>
+                    Select your symptoms and let our machine learning
+                    model provide an initial disease prediction.
+                </p>
+
+                <a
+                    href="{{ url_for('predict') }}"
+                    class="btn"
+                >
+                    Start Prediction
+                </a>
+
+            </div>
+
+
+            <!-- History -->
+
+            <div class="card">
+
+                <div class="icon">📊</div>
+
+                <h2>Prediction History</h2>
+
+                <p>
+                    View your previous disease predictions and
+                    monitor your health-related activity.
+                </p>
+
+                <a
+                    href="{{ url_for('history') }}"
+                    class="btn history-btn"
+                >
+                    View History
+                </a>
+
+            </div>
+
+
+            <!-- Health Information -->
+
+            <div class="card">
+
+                <div class="icon">💡</div>
+
+                <h2>Health Information</h2>
+
+                <p>
+                    Learn more about symptoms, diseases and
+                    preventive healthcare.
+                </p>
+
+                <a
+                    href="{{ url_for('predict') }}"
+                    class="btn"
+                >
+                    Explore
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="notice">
+
+            <strong>⚠️ Important:</strong>
+
+            This application provides an AI-based prediction
+            for educational and decision-support purposes only.
+            It is not a substitute for professional medical
+            diagnosis or treatment.
+
+        </div>
+
+    </div>
+
+</body>
+</html>
